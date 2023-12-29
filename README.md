@@ -122,14 +122,18 @@ Ensuring that the data is clean involves several steps to address issues such as
 
 Performing this task, we quickly noticed that all datasets have the ‘Id’ field in common. This can be used to merge the datasets.
 
-/// install.packages('tidyverse')
+```
+install.packages('tidyverse')
 library(tidyverse)
 daily_activity <- read.csv("dailyActivity_merged.csv") 
 daily_sleep <- read.csv("sleepDay_merged.csv") 
 hourly_step <- read.csv("hourlySteps_merged.csv") 
 hourly_calories <- read.csv("hourlyCalories_merged.csv") 
 minute_sleep <- read.csv("minuteSleep_merged.csv") 
-weight_data <- read.csv("weightLogInfo_merged.csv") ///
+weight_data <- read.csv("weightLogInfo_merged.csv")
+```
+
+
 
 Steps taken for checking the data 
 
