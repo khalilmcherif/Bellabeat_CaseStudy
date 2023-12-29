@@ -7,8 +7,11 @@ Sršen knows that an analysis of Bellabeat’s available consumer data would rev
 What we are asked to do?
 
 Sršen asks to analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices.
+
 • 1. What are some trends in smart device usage?
+
 • 2. How could these trends apply to Bellabeat customers?
+
 • 3. How could these trends help influence Bellabeat marketing strategy?
 
 By the end of this case study, we will produce a report with the following deliverables:
