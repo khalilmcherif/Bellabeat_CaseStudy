@@ -33,7 +33,7 @@ The problem we are trying to solve in this case study is to gain insights into h
 
 . Identify patterns, trends, and potential areas for improvement or innovation.
 
-**Business Decisions Driven by Insights:**
+<h2> Business Decisions Driven by Insights: </h2>
 
 **Product Development and Enhancement:** Identify any shortcomings or pain points in the current
 product usage to improve overall customer satisfaction.
@@ -63,9 +63,10 @@ market positioning of Bellabeat products.
  
 The business task is to conduct a comprehensive analysis of smart device data associated with a specific Bellabeat product. This analysis aims to uncover insights into consumer behavior, preferences, and usage patterns. The ultimate goal is to provide actionable recommendations that will guide Bellabeat’s marketing strategy. The analysis should address questions related to user engagement, feature popularity, potential areas for improvement, and opportunities for growth. The results will be presented to key stakeholders, including the executive team, to inform high-level strategies and tactics for the future success of the product and the company.
 
-<h1> Preparing the data:### </h1>
+<h1> Preparing the data: </h1>
 
 <h2> Where is the data located? </h2>   
+
 All data used for this particular case study was downloaded from Kaggle through this link https://www.ka ggle.com/datasets/arashnic/fitbit (CC0: Public Domain, dataset made available through Mobius): This Kaggle data set contains personal fitness tracker from thirty fitbit users. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
 
 <h2> How is the data organized? </h2>
