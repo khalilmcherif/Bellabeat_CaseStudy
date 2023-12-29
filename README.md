@@ -1,13 +1,18 @@
 About the Company
+
 Urška Sršen and Sando Mur founded Bellabeat, a high-tech company that manufactures health-focused smart products. Sršen used her background as an artist to develop beautifully designed technology that informs and inspires women around the world. Collecting data on activity, sleep, stress, and reproductive health has allowed Bellabeat to empower women with knowledge about their own health and habits.
 The company has invested in traditional advertising media, such as radio, out-of-home billboards, print, and television, but focuses on digital marketing extensively. Bellabeat invests year-round in Google Search, main- taining active Facebook and Instagram pages, and consistently engages consumers on Twitter. Additionally, Bellabeat runs video ads on Youtube and display ads on the Google Display Network to support campaigns around key marketing dates.
 Sršen knows that an analysis of Bellabeat’s available consumer data would reveal more opportunities for growth. She has asked the marketing analytics team to focus on a Bellabeat product and analyze smart device usage data in order to gain insight into how people are already using their smart devices. Then, using this information, she would like high-level recommendations for how these trends can inform Bellabeat marketing strategy.
+
 What we are asked to do?
+
 Sršen asks to analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices.
 • 1. What are some trends in smart device usage?
 • 2. How could these trends apply to Bellabeat customers?
 • 3. How could these trends help influence Bellabeat marketing strategy?
+
 By the end of this case study, we will produce a report with the following deliverables:
+
 • 1. A clear summary of the business task
 • 2. A description of all data sources used
 • 3. Documentation of any cleaning or manipulation of data
