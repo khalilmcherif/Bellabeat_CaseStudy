@@ -9,38 +9,26 @@ Sršen knows that an analysis of Bellabeat’s available consumer data would rev
 <h2> What we are asked to do? </h2>
 
 Sršen asks to analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices.
-
-• 1. What are some trends in smart device usage?
-
-• 2. How could these trends apply to Bellabeat customers?
-
-• 3. How could these trends help influence Bellabeat marketing strategy?
+1. What are some trends in smart device usage?
+2. How could these trends apply to Bellabeat customers?
+3. How could these trends help influence Bellabeat marketing strategy?
 
 By the end of this case study, we will produce a report with the following deliverables:
-
-• 1. A clear summary of the business task
-
-• 2. A description of all data sources used
-
-• 3. Documentation of any cleaning or manipulation of data
-
-• 4. A summary of our analysis
-
-• 5. Supporting visualizations and key findings
-
-• 6. Our top high-level content recommendations based on your analysis
+1. A clear summary of the business task
+2. A description of all data sources used
+3. Documentation of any cleaning or manipulation of data
+4. A summary of our analysis
+5. Supporting visualizations and key findings
+6. Our top high-level content recommendations based on your analysis
 
 <h2> What is the problem you are trying to solve? </h2>
 
 The problem we are trying to solve in this case study is to gain insights into how consumers are using Bellabeat’s smart devices, with a focus on one specific product. The goal is to understand user behavior, preferences, and patterns related to the smart device usage. By doing so, we aim to provide actionable recommendations for Bellabeat’s marketing strategy.
 
 <h2> Problem Statement: </h2>
-
-• Gain insights into how consumers are currently using a specific Bellabeat product and its associated smart device data.
-
-• Understand user engagement, activity, sleep, stress, and any other relevant metrics provided by the smart devices.
-
-• Identify patterns, trends, and potential areas for improvement or innovation.
+. Gain insights into how consumers are currently using a specific Bellabeat product and its associated smart device data.
+. Understand user engagement, activity, sleep, stress, and any other relevant metrics provided by the smart devices.
+. Identify patterns, trends, and potential areas for improvement or innovation.
 
 **Business Decisions Driven by Insights:**
 
