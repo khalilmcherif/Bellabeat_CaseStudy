@@ -120,8 +120,6 @@ Ensuring that the data is clean involves several steps to address issues such as
 
 **Understand the Data:** We started by familiarizing ourselves with the structure and content of the datasets. We used functions such as colnames, str, head, print, and summary to get deeper information about the data, like the size of the data frame, the column names, the data type, etc. 
 
-Performing this task, we quickly noticed that all datasets have the ‘Id’ field in common. This can be used to merge the datasets.
-
 ```
 install.packages('tidyverse')
 library(tidyverse)
@@ -133,23 +131,41 @@ minute_sleep <- read.csv("minuteSleep_merged.csv")
 weight_data <- read.csv("weightLogInfo_merged.csv")
 ```
 
+<h2> Steps taken for checking the data </h2>
 
+**1. Identify all the columns and their names in the datasets**
 
-Steps taken for checking the data 
+**2. Identify the structure of the datasets**
+```
+colnames(daily_activity)
+colnames(daily_sleep)
+colnames(hourly_step)
+colnames(minute_sleep)
+colnames(hourly_calories)
+colnames(weight_data)
 
-1. Identify all the columns and their names in the datasets
+str(daily_activity)
+str(daily_sleep)
+str(hourly_calories)
+str(minute_sleep)
+str(hourly_step)
+str(weight_data)
+```
+**3. Display the first few rows of the data frames, matrices, and vectors**
 
-2. Identify the structure of the datasets
- colnames(daily_activity) colnames(daily_sleep) colnames(hourly_step) colnames(minute_sleep) colnames(hourly_calories) colnames(weight_data)
- str(daily_activity) str(daily_sleep) str(hourly_calories)
-4
-
- str(minute_sleep) str(hourly_step) str(weight_data)
-3. Display the first few rows of the data frames, matrices, and vectors
 We note from the first analysis that all four datasets have the ‘Id’ field in common which can be used to merge the datasets.
-4. Understanding some summary statistics
- head(daily_activity) head(daily_sleep) head(hourly_calories) head(minute_sleep) head(hourly_step) head(weight_data)
- library(dplyr) daily_activity %>%
+
+**Understanding some summary statistics**
+```
+head(daily_activity)
+head(daily_sleep)
+head(hourly_calories)
+head(minute_sleep)
+head(hourly_step)
+head(weight_data)
+
+library(dplyr)
+daily_activity %>%
 select(ActivityDate, TotalSteps, TotalDistance,SedentaryMinutes, Calories) %>% summary()
 daily_sleep %>% select(TotalSleepRecords,TotalMinutesAsleep,TotalTimeInBed) %>% summary()
 hourly_calories %>% select(ActivityHour, Calories) %>% summary()
@@ -158,36 +174,71 @@ hourly_step %>%
 select(ActivityHour, StepTotal) %>% summary()
 weight_data %>%
 select(WeightKg, Fat, BMI) %>% summary()
-From the summaries of each data frame we see clearly that there are no missing values for each dataset.
-5. Display the unique participants for each dataset
-• daily_activity has 33 unique participants • daily_sleep has 24 unique participants
- n_distinct(daily_activity$Id) n_distinct(daily_sleep$Id) n_distinct(hourly_calories$Id) n_distinct(hourly_step$Id) n_distinct(minute_sleep$Id) n_distinct(weight_data$Id)
-5
+```
 
-• hourly_calories has 33 unique participants • hourly_step has 33 unique participants
-• minute_sleep has 24 unique participants • weight_data has 8 unique participants
+From the summaries of each data frame we see clearly that there are no missing values for each dataset.
+
+**4. Display the unique participants for each dataset**
+```
+n_distinct(daily_activity$Id)
+n_distinct(daily_sleep$Id)
+n_distinct(hourly_calories$Id)
+n_distinct(hourly_step$Id)
+n_distinct(minute_sleep$Id)
+n_distinct(weight_data$Id)
+```
+
+• daily_activity has 33 unique participants 
+• daily_sleep has 24 unique participants
+• hourly_calories has 33 unique participants 
+• hourly_step has 33 unique participants
+• minute_sleep has 24 unique participants 
+• weight_data has 8 unique participants
+
 We have to take in mind that all four datasets have different sizes which can cause a problem merging or joining the datasets for further analysis.
-6. Display the number of observations in each dataframe
+
+**5. Display the number of observations in each dataframe**
+```
+nrow(daily_activity)
+nrow(daily_sleep)
+nrow(hourly_calories)
+nrow(hourly_step)
+nrow(minute_sleep)
+nrow(weight_data)
+```
 • daily_activity has 940 obs of 15 variables
 • daily_sleep has 413 obs of 5 variables
 • hourly_calories has 22099 obs of 3 variables • hourly_step has 22099 obs of 3 variables
 • minute_sleep has 188521 obs of 4 variables • weight_data has 67 obs of 8 variables
-7. Check missing or null values in each dataframe
-*Analyse missing values in the data frame Weight which turns out to be data related to Fat columns with 65 missing values
-9. Check for duplicates in the dataframes
-h columns with
-ssing data
-h missing data
-6
- nrow(daily_activity) nrow(daily_sleep) nrow(hourly_calories) nrow(hourly_step) nrow(minute_sleep) nrow(weight_data)
- # Find out which columns with missing data if any
-missing_values_DA <- sapply(daily_activity, function(x) any(is.na(x))) #daily_activity missing_values_DS <- sapply(daily_sleep, function(x) any(is.na(x))) #daily_sleep missing_values_HC <- sapply(hourly_calories, function(x) any(is.na(x))) #hourly_calories missing_values_HSt <- sapply(hourly_step, function(x) any(is.na(x))) #hourly_step missing_values_MS <- sapply(minute_sleep, function(x) any(is.na(x))) #minute_sleep missing_values_weight <- sapply(daily_activity, function(x) any(is.na(x))) #weight
- # Print the columns with missing values
-missing_values_weight <- sapply(daily_activity, function(x) any(is.na(x))) # find out whic missing_data_count7 <- sapply(weight_data, function(x) sum(is.na(x))) # count rows with mi print(weight_data[is.na(weight_data$Fat) | !is.finite(weight_data$Fat),]) # Print rows wit
- minute_sleep <- minute_sleep[, !names(minute_sleep) %in% "logId"] # Check for duplicates in the entire data frame
-any_duplicates_DA <- any(duplicated(daily_activity)) any_duplicates_DS <- any(duplicated(daily_sleep)) any_duplicates_HC <- any(duplicated(hourly_calories)) any_duplicates_HSt <- any(duplicated(hourly_step)) any_duplicates_MS <- any(duplicated(minute_sleep)) any_duplicates_W <- any(duplicated(weight_data))
-# Print the result
 
+**6. Check missing or null values in each dataframe**
+```
+# Find out which columns with missing data if any
+missing_values_DA <- sapply(daily_activity, function(x) any(is.na(x))) #daily_activity
+missing_values_DS <- sapply(daily_sleep, function(x) any(is.na(x))) #daily_sleep
+missing_values_HC <- sapply(hourly_calories, function(x) any(is.na(x))) #hourly_calories
+missing_values_HSt <- sapply(hourly_step, function(x) any(is.na(x))) #hourly_step
+missing_values_MS <- sapply(minute_sleep, function(x) any(is.na(x))) #minute_sleep
+missing_values_weight <- sapply(daily_activity, function(x) any(is.na(x))) #weight
+
+ # Print the columns with missing values
+missing_data_count7 <- sapply(weight_data, function(x) sum(is.na(x))) # count rows with missing values
+print(weight_data[is.na(weight_data$Fat) | !is.finite(weight_data$Fat),]) # Print rows with missing data
+```
+
+Analyzing the missing values in the data frame Weight which turns out to be data related to Fat columns with 65 missing values
+
+**7. Check for duplicates in the dataframes**
+```
+minute_sleep <- minute_sleep[, !names(minute_sleep) %in% "logId"] # Check for duplicates in the entire data frame
+any_duplicates_DA <- any(duplicated(daily_activity))
+any_duplicates_DS <- any(duplicated(daily_sleep))
+any_duplicates_HC <- any(duplicated(hourly_calories))
+any_duplicates_HSt <- any(duplicated(hourly_step))
+any_duplicates_MS <- any(duplicated(minute_sleep))
+any_duplicates_W <- any(duplicated(weight_data))
+
+# Print the result
  if (any_duplicates_DA) {
 cat("There are duplicates in the data frame.\n")
 } else {
@@ -203,176 +254,163 @@ cat("There are duplicates in the data frame.\n")
 } else {
 cat("There are no duplicates in the data frame.\n")
 }
+
  # Identify and display the duplicated rows in the entire data frame
 duplicates_DS <- daily_sleep[duplicated(daily_sleep), ]
+
 # Print the duplicated rows
 if (nrow(duplicates_DS) > 0) { cat("Duplicated rows:\n") print(duplicates_DS)
 } else {
 cat("There are no duplicated rows in the data frame.\n")
 }
 duplicates_MS <- minute_sleep[duplicated(minute_sleep), ]
+
 # Print the duplicated rows
 if (nrow(duplicates_MS) > 0) { cat("Duplicated rows:\n") print(duplicates_MS)
 } else {
 cat("There are no duplicated rows in the data frame.\n")
 }
-8. Transforming the data
+```
+
+**8. Transforming the data**
+
 We noticed the Date format is different for most of the datasets. Let’s make them all similar for future analysis.
- library(lubridate)
+```
+library(lubridate)
+
 # Convert 'ActivityDate' to a DateTime object
 daily_activity <- read_csv("dailyActivity_merged.csv")
 # Create new columns 'Date' and 'Time'
 daily_activity <- mutate(daily_activity, ActivityDate = mdy_hms(paste(ActivityDate, "00:00 daily_activity$Date <- as.Date(daily_activity$ActivityDate)
 daily_activity$Time <- format(daily_activity$ActivityDate, "%H:%M:%S")
-# Remove the original 'ActivityDate' column
-daily_activity$ActivityDate <- NULL
-daily_activity$Activity_Date <- NULL
-7
-:00")))
 
  # Convert 'SleepDay' to a DateTime object
 daily_sleep$SleepDay <- mdy_hms(daily_sleep$SleepDay)
 # Create new columns 'Date' and 'Time'
-daily_sleep$Date <- as.Date(daily_sleep$SleepDay) daily_sleep$Time <- format(daily_sleep$SleepDay, "%H:%M:%S") # Remove the original 'ActivityDate' column daily_sleep$SleepDay <- NULL
+daily_sleep$Date <- as.Date(daily_sleep$SleepDay) 
+daily_sleep$Time <- format(daily_sleep$SleepDay, "%H:%M:%S") # Remove the original 'ActivityDate' column 
+daily_sleep$SleepDay <- NULL
+
 # Convert 'ActivityHour' in hourly_calories to a DateTime object
-hourly_calories$ActivityHour <- mdy_hms(hourly_calories$ActivityHour) hourly_calories$Date <- as.Date(hourly_calories$ActivityHour) hourly_calories$Time <- format(hourly_calories$ActivityHour, "%H:%M:%S") hourly_calories$ActivityHour <- NULL
+hourly_calories$ActivityHour <- mdy_hms(hourly_calories$ActivityHour) 
+hourly_calories$Date <- as.Date(hourly_calories$ActivityHour) 
+hourly_calories$Time <- format(hourly_calories$ActivityHour, "%H:%M:%S") 
+hourly_calories$ActivityHour <- NULL
+
 # Convert 'ActivityHour' in hourly_step to a DateTime object
-hourly_step$ActivityHour <- mdy_hms(hourly_step$ActivityHour) hourly_step$Date <- as.Date(hourly_step$ActivityHour) hourly_step$Time <- format(hourly_step$ActivityHour, "%H:%M:%S") hourly_step$ActivityHour <- NULL
+hourly_step$ActivityHour <- mdy_hms(hourly_step$ActivityHour) 
+hourly_step$Date <- as.Date(hourly_step$ActivityHour) 
+hourly_step$Time <- format(hourly_step$ActivityHour, "%H:%M:%S") 
+hourly_step$ActivityHour <- NULL
+
 # Convert 'date' in minute_sleep to a DateTime object
-minute_sleep$date <- mdy_hms(minute_sleep$date) minute_sleep$Date <- as.Date(minute_sleep$date) minute_sleep$Time <- format(minute_sleep$date, "%H:%M:%S") minute_sleep$date <- NULL
+minute_sleep$date <- mdy_hms(minute_sleep$date) 
+minute_sleep$Date <- as.Date(minute_sleep$date)
+minute_sleep$Time <- format(minute_sleep$date, "%H:%M:%S") 
+minute_sleep$date <- NULL
+
 # Convert 'Date' in weight_data to a DateTime object
 weight_data$Date2 <- weight_data$Date
 weight_data$Date <- NULL
-weight_data$Date2 <- mdy_hms(weight_data$Date2) weight_data$Date <- as.Date(weight_data$Date2) weight_data$Time <- format(weight_data$Date2, "%H:%M:%S") weight_data$Date2 <- NULL
+weight_data$Date2 <- mdy_hms(weight_data$Date2) 
+weight_data$Date <- as.Date(weight_data$Date2) 
+weight_data$Time <- format(weight_data$Date2, "%H:%M:%S") 
+weight_data$Date2 <- NULL
+```
+
 verifying all Dates and Times are in the same format
- head(daily_activity$Date) head(daily_activity$Time)
+```
+head(daily_activity$Date) head(daily_activity$Time)
 head(daily_sleep$Date) head(daily_sleep$Time)
 head(hourly_calories$Date) head(hourly_calories$Time)
 head(hourly_step$Date) head(hourly_step$Time)
 head(minute_sleep$Date) head(minute_sleep$Time)
 head(weight_data$Date) head(weight_data$Time)
-8
+```
 
-Analyzing users Behavior
-Most active time of the day
+##Analyzing users Behavior##
+
+<h1> Most active time of the day </h1>
+
 We merged hourly_steps and hourly_calories to find out when during the day users are most active
+
 Let’s Plot the results of the number of steps during the day
- steps_calories <- merge(hourly_step, hourly_calories, by = c("Id", "Date", "Time")) steps_calories_grouped <- steps_calories %>%
+```
+steps_calories <- merge(hourly_step, hourly_calories, by = c("Id", "Date", "Time"))
+steps_calories_grouped <- steps_calories %>%
 group_by(Time) %>%
 summarise(StepTotal = sum(StepTotal), CalorieTotal = sum(Calories))
 steps_calories_grouped2 <- steps_calories %>% group_by(Id, Time) %>%
 summarise(StepTotal = mean(StepTotal))
- library(ggplot2)
+
+library(ggplot2)
 ggplot(steps_calories_grouped2, aes(x = Time, y = StepTotal)) +
 geom_bar(stat = "identity", fill = "skyblue", color = "black", position = "dodge") + labs(title = "Total number of steps during the day",
-x = "Time",
-y = "Total number of steps", fill = "Id") +
-theme_minimal() +
-theme(axis.text.x = element_text(angle = 90))
-Total number of steps during the day
-                          3000
-2000
-1000
-0
-Behavior 1:
-Time
-                                                                                                                                 From the analysis of the average number of steps users take during the day, we can observe a peak at 8:00AM, 9
-00:00:00 01:00:00 02:00:00 03:00:00 04:00:00 05:00:00 06:00:00 07:00:00 08:00:00 09:00:00 10:00:00 11:00:00 12:00:00 13:00:00 14:00:00 15:00:00 16:00:00 17:00:00 18:00:00 19:00:00 20:00:00 21:00:00 22:00:00 23:00:00
-Total number of steps
+x = "Time", y = "Total number of steps", fill = "Id") + theme_minimal() + theme(axis.text.x = element_text(angle = 90))
+```
 
-another one at 2:00PM, but the highest average occurs at 7:00PM.
+<h2> Total number of steps during the day </h2> 
+
+**Behavior 1:**
+
+From the analysis of the average number of steps users take during the day, we can observe a peak at 8:00AM, another one at 2:00PM, but the highest average occurs at 7:00PM.
 This could be due to the fact that users commute or walk to work between the hours of 8 to 9am in the morning and 6 to 7pm in the evening. Moreover, users walk more or are more active after working hours. Doing errands, going to the gym, going out shopping or for dinner. Lunch time is also a time where number of steps are up.
-• Our users are mostly working people who are active going to and leaving work, also during lunch hours.
-Let’s check the sleeping habits of users
- library(dplyr)
+
+• Our users are mostly working people who are active going to and leaving work, also during lunch hours. 
+
+<h1> Let’s check the sleeping habits of users </h1>
+
+<h2> Total number of sleeping minutes during the day </h2>
+
+```
+library(dplyr)
 grouped_min_sleep <- minute_sleep %>%
 mutate(Hour = format(as.POSIXct(Time, format = "%H:%M:%S"), format = "%H")) %>% group_by(Hour) %>%
 summarise(TotalValue = sum(value), Count = n())
-ggplot(grouped_min_sleep, aes(x = Hour, y = TotalValue)) +
-geom_bar(stat = "identity", fill = "darkgreen", color = "black", position = "dodge") + labs(title = "Total number of sleeping minutes during the day",
-x = "Hour of the day",
-y = "Total of sleeping minutes") + theme_minimal() +
-theme(axis.text.x = element_text(angle = 90))
-Total number of sleeping minutes during the day
-                        25000
-20000
-15000
-10000
-5000
-0
-Behavior #2:
-Hour of the day
-                       From the analysis of the total sleeping minutes of users during the day, we can observe the lowest are between 8:00AM and 10:00PM, with highest minutes asleep are between the hours of 11:00PM and 7:00AM. This goes confirms our previous conclusion that our users follow the trend and behavior of working adults who go to
-10
-00
-01
-02
-03
-04
-05
-06
-07
-08
-09
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-Total of sleeping minutes
+ggplot(grouped_min_sleep, aes(x = Hour, y = TotalValue)) + geom_bar(stat = "identity", fill = "darkgreen", color = "black", position = "dodge") + labs(title = "Total number of sleeping minutes during the day", x = "Hour of the day", y = "Total of sleeping minutes") + theme_minimal() + theme(axis.text.x = element_text(angle = 90))
+```
 
-bed at 11:00PM and wake up at 7:00AM.
+**Behavior #2:**
+
+From the analysis of the total sleeping minutes of users during the day, we can observe the lowest are between 8:00AM and 10:00PM, with highest minutes asleep are between the hours of 11:00PM and 7:00AM. This goes confirms our previous conclusion that our users follow the trend and behavior of working adults who go to bed at 10:00PM and wake up at 7:00AM.
+
 • Our users are mostly working people who are awake from 7:00AM to 11:00PM. They mostly go to bed at around 11:00PM
 Average calories burned during the day
-Average number of calories burned during the day
-                        120
-80
-40
-0
-Most active day of the week
-Hour of the day
-       We created a new column in the daily_activity dataset called “DayOfWeek”. We then did the following to analyze the average active minutes for users during the week. Note that active minutes are the sum of VeryActiveMinutes, FairlyActiveMinutes, and LightlyActiveMinutes.
-We now plot the total activity minutes during the days of the week
-iveMinutes", "
-11
- library(dplyr)
+
+<h2> Average number of calories burned during the day </h2>
+
+```
+library(dplyr)
 grouped_Cal <- hourly_calories %>%
 group_by(Time) %>% summarise(Average_Cal = mean(Calories))
 ggplot(grouped_Cal, aes(x = Time, y = Average_Cal)) +
-geom_bar(stat = "identity", fill = "green", color = "black", position = "dodge") + labs(title = "Average number of calories burned during the day",
-x = "Hour of the day",
-y = "Average Calories burned") + theme_minimal() +
-theme(axis.text.x = element_text(angle = 90))
-                        00:00:00 01:00:00 02:00:00 03:00:00 04:00:00 05:00:00 06:00:00 07:00:00 08:00:00 09:00:00 10:00:00 11:00:00 12:00:00 13:00:00 14:00:00 15:00:00 16:00:00 17:00:00 18:00:00 19:00:00 20:00:00 21:00:00 22:00:00 23:00:00
-Average Calories burned
- daily_activity$DayOfWeek <- weekdays(as.Date(daily_activity$Date)) daily_activity$ActiveMinutes <- rowSums(daily_activity[, c("VeryActiveMinutes", "FairlyAct
+geom_bar(stat = "identity", fill = "green", color = "black", position = "dodge") + labs(title = "Average number of calories burned during the day", x = "Hour of the day", y = "Average Calories burned") + theme_minimal() +theme(axis.text.x = element_text(angle = 90))
+```
 
- grouped_ActiveMin <- daily_activity %>% group_by(Id, DayOfWeek) %>% summarise(Avg_ActiveMin = mean(ActiveMinutes))
-grouped_ActiveMin$DayOfWeek <- factor(grouped_ActiveMin$DayOfWeek, levels = c("Monday", "T
+<h2> Most active day of the week </h2>
+
+Hour of the day
+
+We created a new column in the daily_activity dataset called “DayOfWeek”. We then did the following to analyze the average active minutes for users during the week. Note that active minutes are the sum of VeryActiveMinutes, FairlyActiveMinutes, and LightlyActiveMinutes.
+
+We now plot the total activity minutes during the days of the week
+
+              
+Average Calories burned
+ daily_activity$DayOfWeek <- weekdays(as.Date(daily_activity$Date)) daily_activity$ActiveMinutes <- rowSums(daily_activity[, c("VeryActiveMinutes", "FairlyActiveMinutes", "
+
+grouped_ActiveMin <- daily_activity %>% group_by(Id, DayOfWeek) %>% summarise(Avg_ActiveMin = mean(ActiveMinutes))
+grouped_ActiveMin$DayOfWeek <- factor(grouped_ActiveMin$DayOfWeek, levels = c("Monday", "Tuesday", "Wedn
+
 ggplot(grouped_ActiveMin, aes(x = DayOfWeek, y = Avg_ActiveMin)) +
 geom_bar(stat = "identity", fill = "purple", color = "black", position = "dodge") +
-labs(title = "Average active minutes during the week", x = "Days of the Week",
-y = "Average Active Minutes") +
-#fill = "Id") +
-theme_minimal() +
+labs(title = "Average active minutes during the week", x = "Days of the Week", y = "Average Active Minutes") + theme_minimal() +
 theme(axis.text.x = element_text(angle = 45))
+
 Average active minutes during the week
-400
-300
-200
-100
-0
+
 Behavior #3
-uesday", "Wedn
+
                                                                                                                                                                                                                                                    Days of the Week
 We can conclude from the bar graph that users are more active during Saturdays. So they are considered weekend warriors as it is expected of most people in general.
 Most steps taken during the day
@@ -385,15 +423,11 @@ Thursday
 Friday
 Saturday
 Sunday
- grouped_steps <- hourly_step %>% group_by(Id, Time) %>% summarise(Avg_steps = mean(StepTotal))
-ggplot(grouped_steps, aes(x = Time, y = Avg_steps)) +
-geom_bar(stat = "identity", fill = "brown", color = "black", position = "dodge") +
 
- labs(title = "Average steps taken during the day", x = "Time of the day",
-y = "Average Steps taken") +
-#fill = "Id") +
-theme_minimal() +
-theme(axis.text.x = element_text(angle = 45))
+grouped_steps <- hourly_step %>% group_by(Id, Time) %>% summarise(Avg_steps = mean(StepTotal))
+ggplot(grouped_steps, aes(x = Time, y = Avg_steps)) + geom_bar(stat = "identity", fill = "brown", color = "black", position = "dodge") +
+labs(title = "Average steps taken during the day", x = "Time of the day", y = "Average Steps taken") + theme_minimal() + theme(axis.text.x= element_text(angle = 45))
+
 Average steps taken during the day
 3000
 2000
@@ -403,44 +437,23 @@ Behavior #4
                                                                                                                                                             Time of the day
 From the bar graph, we see that on the average most steps taken by users are at the hours of 7:00AM, 1:00PM and, 6:00PM. Again this strengthen our assumption that users are working adults whom, a good proportion of them, prefer to walk to work and go out walking during lunch breaks. One should also not omit that users might exercise as well during those peak hours.
 Weight loss journey
-To analyze this users behavior and understand if they are in a journey to losing weight, we decided to analyze the weight changes of users during the available data period which is from the 03.12.2016 to 05.12.2016.
- library(ggplot2) library(dplyr)
+To analyze this users behavior and understand if they are in a journey to losing weight, we decided to analyze the weight changes of users during the available data period which is from the 04.12.2016 to 05.12.2016.
+
+library(ggplot2) library(dplyr)
 grouped_weight <- weight_data %>% group_by(Id, Date) %>% summarise(AvgWeightKg = mean(WeightKg))
 # Plotting
-ggplot(grouped_weight, aes(x = Date, y = AvgWeightKg, fill = as.factor(Id))) + geom_bar(stat = "identity", position = "dodge", color = "black") +
+ggplot(grouped_weight, aes(x = Date, y = AvgWeightKg, fill = as.factor(Id))) + geom_bar(stat = "identity", position = "dodge", color = "black") + labs(title = "Average weight for each user on different dates", x = "Date", y = "Average Weight (Kg)", fill = "User ID") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 13
 Average Steps taken
-00:00:00 01:00:00
-02:00:00 03:00:00
-04:00:00 05:00:00
-06:00:00 07:00:00
-08:00:00 09:00:00
-10:00:00 11:00:00
-12:00:00 13:00:00
-14:00:00 15:00:00
-16:00:00 17:00:00
-18:00:00 19:00:00
-20:00:00 21:00:00
-22:00:00 23:00:00
 
- labs(title = "Average weight for each user on different dates", x = "Date",
-y = "Average Weight (Kg)",
-fill = "User ID") + theme_minimal() +
-theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ 
 Average weight for each user on different dates
-         100
-50
-0
-User ID 1503960366
-     1927972279
-     2873212765
-     4319703577
-     4558609924
-     5577150313
-     6962181067
-     8877689391
+
                      Date
 From the graph we see that the selected users have stable weight and there are no signs of weight loss behavior. However, the data is limited and historical data, especially for weight changes, is necessary in order to better understand users weight behavior. Thus more data is needed to be collected to draw a better conclusion. This analysis is thus inconclusive.
+
 Analyzing users Preferences
 Logs entry preference
 Let’s study manual or automatic logs for engaged users.
