@@ -37,45 +37,66 @@ The problem we are trying to solve in this case study is to gain insights into h
 <h2> Problem Statement: </h2>
 
 • Gain insights into how consumers are currently using a specific Bellabeat product and its associated smart device data.
+
 • Understand user engagement, activity, sleep, stress, and any other relevant metrics provided by the smart devices.
+
 • Identify patterns, trends, and potential areas for improvement or innovation.
-Business Decisions Driven by Insights:
+
+**Business Decisions Driven by Insights:**
+
 • Product Development and Enhancement: Identify any shortcomings or pain points in the current
 product usage to improve overall customer satisfaction.
-• Targeted Marketing Campaigns: Tailor marketing campaigns based on the identified user segments and preferences. Focus advertising efforts on the most engaging features to maximize the impact of marketing initiatives.
-• User Engagement Strategies: Develop strategies to increase user engagement with the smart devices and the Bellabeat app. Leverage insights to encourage specific behaviors that contribute to improved health and wellness.
-• Digital Marketing Optimization: Allocate resources more effectively by focusing on channels and platforms that align with user behavior. Tailor digital marketing strategies to resonate with the identified user segments.
+
+**Targeted Marketing Campaigns:** 
+
+. Tailor marketing campaigns based on the identified user segments and preferences. Focus advertising efforts on the most engaging features to maximize the impact of marketing initiatives.
+
+**User Engagement Strategies:** 
+
+. Develop strategies to increase user engagement with the smart devices and the Bellabeat app. Leverage insights to encourage specific behaviors that contribute to improved health and wellness.
+
+**Digital Marketing Optimization:** 
+
+. Allocate resources more effectively by focusing on channels and platforms that align with user behavior. Tailor digital marketing strategies to resonate with the identified user segments.
+
 By addressing these aspects, the insights gained from the analysis can drive strategic decisions across various facets of Bellabeat’s business, ultimately contributing to improved customer satisfaction, increased market share, and sustained growth in the smart device market.
 
-2. Business Task:
+<h2> Business Task: </h2> 
 
 The business task for this case study is to analyze smart device data for a specific Bellabeat product, focusing on understanding how consumers are using their smart devices. The goal is to derive insights that can inform Bellabeat’s marketing strategy, drive product improvements, and identify growth opportunities.
 
-3. Key Stakeholders:
-Urška Sršen (Chief Creative Officer): As a CCO, she is likely concerned with the creative direction and
-market positioning of Bellabeat products.
-Sando Mur (Co-founder): Being a key member of the executive team, he may be interested in the data-driven insights to inform strategic decisions and product development.
-Bellabeat Marketing Analytics Team: This team of data analysts is responsible for collecting, analyzing, and reporting data to guide Bellabeat’s marketing strategy. They are key stakeholders in the analysis.
+<h2> Key Stakeholders: </h2>
 
-4. Statement of the Business Task:
+**Urška Sršen** (Chief Creative Officer): As a CCO, she is likely concerned with the creative direction and
+market positioning of Bellabeat products.
+
+**Sando Mur** (Co-founder): Being a key member of the executive team, he may be interested in the data-driven insights to inform strategic decisions and product development.
+
+**Bellabeat Marketing Analytics Team:** This team of data analysts is responsible for collecting, analyzing, and reporting data to guide Bellabeat’s marketing strategy. They are key stakeholders in the analysis.
+
+<h2> Statement of the Business Task: </h2>
  
 The business task is to conduct a comprehensive analysis of smart device data associated with a specific Bellabeat product. This analysis aims to uncover insights into consumer behavior, preferences, and usage patterns. The ultimate goal is to provide actionable recommendations that will guide Bellabeat’s marketing strategy. The analysis should address questions related to user engagement, feature popularity, potential areas for improvement, and opportunities for growth. The results will be presented to key stakeholders, including the executive team, to inform high-level strategies and tactics for the future success of the product and the company.
 
-Preparing the data:
+###Preparing the data:###
 
-1. Where is the data located?
+<h2> Where is the data located? </h2>
    
 All data used for this particular case study was downloaded from Kaggle through this link https://www.ka ggle.com/datasets/arashnic/fitbit (CC0: Public Domain, dataset made available through Mobius): This Kaggle data set contains personal fitness tracker from thirty fitbit users. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
 
-3. How is the data organized?
+<h2> How is the data organized? </h2>
    
-The data is organized by categories as follows: * Daily: Activity, Calories, Intensities, Steps, Sleep • Hourly: Calories, intensities, Steps
-• Minutes: Calories: Narrow, Wide
-• Intensities: Narrow, Wide
-• METs Narrow
-• Sleep
-• Steps: Narrow, Wide • Heart Rate
-• Weight
+The data is organized by categories as follows:
+
+* Daily: Activity, Calories, Intensities, Steps, Sleep
+* Hourly: Calories, intensities, Steps
+* Minutes: Calories: Narrow, Wide
+* Intensities: Narrow, Wide
+* METs Narrow
+* Sleep
+* Steps: Narrow, Wide 
+* Heart Rate
+* Weight
 
 The data is reliable and has been made available by Möbius in his Kaggle account and publicly available
 through this website https://www.kaggle.com/datasets/arashnic/fitbit.
