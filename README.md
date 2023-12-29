@@ -188,11 +188,16 @@ n_distinct(hourly_step$Id)
 n_distinct(minute_sleep$Id)
 n_distinct(weight_data$Id)
 ```
-• daily_activity has 33 unique participants 
+. daily_activity has 33 unique participants 
+
 • daily_sleep has 24 unique participants
+
 • hourly_calories has 33 unique participants 
+
 • hourly_step has 33 unique participants
+
 • minute_sleep has 24 unique participants 
+
 • weight_data has 8 unique participants
 
 We have to take in mind that all four datasets have different sizes which can cause a problem merging or joining the datasets for further analysis.
@@ -207,9 +212,16 @@ nrow(minute_sleep)
 nrow(weight_data)
 ```
 • daily_activity has 940 obs of 15 variables
+
 • daily_sleep has 413 obs of 5 variables
-• hourly_calories has 22099 obs of 3 variables • hourly_step has 22099 obs of 3 variables
-• minute_sleep has 188521 obs of 4 variables • weight_data has 67 obs of 8 variables
+
+• hourly_calories has 22099 obs of 3 variables 
+
+• hourly_step has 22099 obs of 3 variables
+
+• minute_sleep has 188521 obs of 4 variables 
+
+• weight_data has 67 obs of 8 variables
 
 **6. Check missing or null values in each dataframe**
 ```
@@ -328,7 +340,7 @@ head(minute_sleep$Date) head(minute_sleep$Time)
 head(weight_data$Date) head(weight_data$Time)
 ```
 
-##Analyzing users Behavior##
+## Analyzing users Behavior ##
 
 <h1> Most active time of the day </h1>
 
