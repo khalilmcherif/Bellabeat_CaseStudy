@@ -134,8 +134,6 @@ weight_data <- read.csv("weightLogInfo_merged.csv")
 <h2> Steps taken for checking the data </h2>
 
 **1. Identify all the columns and their names in the datasets**
-
-**2. Identify the structure of the datasets**
 ```
 colnames(daily_activity)
 colnames(daily_sleep)
@@ -143,7 +141,11 @@ colnames(hourly_step)
 colnames(minute_sleep)
 colnames(hourly_calories)
 colnames(weight_data)
+```
 
+**2. Identify the structure of the datasets**
+
+```
 str(daily_activity)
 str(daily_sleep)
 str(hourly_calories)
@@ -151,7 +153,6 @@ str(minute_sleep)
 str(hourly_step)
 str(weight_data)
 ```
-**3. Display the first few rows of the data frames, matrices, and vectors**
 
 We note from the first analysis that all four datasets have the ‘Id’ field in common which can be used to merge the datasets.
 
@@ -187,7 +188,6 @@ n_distinct(hourly_step$Id)
 n_distinct(minute_sleep$Id)
 n_distinct(weight_data$Id)
 ```
-
 • daily_activity has 33 unique participants 
 • daily_sleep has 24 unique participants
 • hourly_calories has 33 unique participants 
