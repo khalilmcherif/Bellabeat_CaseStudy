@@ -1,4 +1,4 @@
----About the Company
+**About the Company**
 
 Urška Sršen and Sando Mur founded Bellabeat, a high-tech company that manufactures health-focused smart products. Sršen used her background as an artist to develop beautifully designed technology that informs and inspires women around the world. Collecting data on activity, sleep, stress, and reproductive health has allowed Bellabeat to empower women with knowledge about their own health and habits.
 
@@ -6,7 +6,7 @@ The company has invested in traditional advertising media, such as radio, out-of
 
 Sršen knows that an analysis of Bellabeat’s available consumer data would reveal more opportunities for growth. She has asked the marketing analytics team to focus on a Bellabeat product and analyze smart device usage data in order to gain insight into how people are already using their smart devices. Then, using this information, she would like high-level recommendations for how these trends can inform Bellabeat marketing strategy.
 
-What we are asked to do?
+__What we are asked to do?__
 
 Sršen asks to analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices.
 
