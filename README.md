@@ -6,7 +6,7 @@ The company has invested in traditional advertising media, such as radio, out-of
 
 Sršen knows that an analysis of Bellabeat’s available consumer data would reveal more opportunities for growth. She has asked the marketing analytics team to focus on a Bellabeat product and analyze smart device usage data in order to gain insight into how people are already using their smart devices. Then, using this information, she would like high-level recommendations for how these trends can inform Bellabeat marketing strategy.
 
-__What we are asked to do?__
+<h2> What we are asked to do? </h2>
 
 Sršen asks to analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices.
 
