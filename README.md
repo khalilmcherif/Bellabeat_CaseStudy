@@ -27,7 +27,9 @@ The problem we are trying to solve in this case study is to gain insights into h
 
 <h2> Problem Statement: </h2>
 . Gain insights into how consumers are currently using a specific Bellabeat product and its associated smart device data.
+
 . Understand user engagement, activity, sleep, stress, and any other relevant metrics provided by the smart devices.
+
 . Identify patterns, trends, and potential areas for improvement or innovation.
 
 **Business Decisions Driven by Insights:**
