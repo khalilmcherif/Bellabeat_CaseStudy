@@ -30,11 +30,11 @@ By the end of this case study, we will produce a report with the following deliv
 
 • 6. Our top high-level content recommendations based on your analysis
 
-What is the problem you are trying to solve?
+<h2> What is the problem you are trying to solve? </h2>
 
 The problem we are trying to solve in this case study is to gain insights into how consumers are using Bellabeat’s smart devices, with a focus on one specific product. The goal is to understand user behavior, preferences, and patterns related to the smart device usage. By doing so, we aim to provide actionable recommendations for Bellabeat’s marketing strategy.
 
-1. Problem Statement:
+<h2> Problem Statement: </h2>
 
 • Gain insights into how consumers are currently using a specific Bellabeat product and its associated smart device data.
 • Understand user engagement, activity, sleep, stress, and any other relevant metrics provided by the smart devices.
