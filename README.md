@@ -19,11 +19,13 @@ By the end of this case study, we will produce a report with the following deliv
 • 4. A summary of our analysis
 • 5. Supporting visualizations and key findings
 • 6. Our top high-level content recommendations based on your analysis
-What is the problem you are trying to solve?
-The problem we are trying to solve in this case study is to gain insights into how consumers are using Bellabeat’s smart devices, with a focus on one specific product. The goal is to understand user behavior, preferences, and patterns related to the smart device usage. By doing so, we aim to provide actionable recommendations for Bellabeat’s marketing strategy.
-1
 
-Problem Statement:
+What is the problem you are trying to solve?
+
+The problem we are trying to solve in this case study is to gain insights into how consumers are using Bellabeat’s smart devices, with a focus on one specific product. The goal is to understand user behavior, preferences, and patterns related to the smart device usage. By doing so, we aim to provide actionable recommendations for Bellabeat’s marketing strategy.
+
+1. Problem Statement:
+
 • Gain insights into how consumers are currently using a specific Bellabeat product and its associated smart device data.
 • Understand user engagement, activity, sleep, stress, and any other relevant metrics provided by the smart devices.
 • Identify patterns, trends, and potential areas for improvement or innovation.
@@ -34,21 +36,29 @@ product usage to improve overall customer satisfaction.
 • User Engagement Strategies: Develop strategies to increase user engagement with the smart devices and the Bellabeat app. Leverage insights to encourage specific behaviors that contribute to improved health and wellness.
 • Digital Marketing Optimization: Allocate resources more effectively by focusing on channels and platforms that align with user behavior. Tailor digital marketing strategies to resonate with the identified user segments.
 By addressing these aspects, the insights gained from the analysis can drive strategic decisions across various facets of Bellabeat’s business, ultimately contributing to improved customer satisfaction, increased market share, and sustained growth in the smart device market.
-1. Business Task:
+
+2. Business Task:
+
 The business task for this case study is to analyze smart device data for a specific Bellabeat product, focusing on understanding how consumers are using their smart devices. The goal is to derive insights that can inform Bellabeat’s marketing strategy, drive product improvements, and identify growth opportunities.
-2. Key Stakeholders:
+
+3. Key Stakeholders:
 Urška Sršen (Chief Creative Officer): As a CCO, she is likely concerned with the creative direction and
 market positioning of Bellabeat products.
 Sando Mur (Co-founder): Being a key member of the executive team, he may be interested in the data-driven insights to inform strategic decisions and product development.
 Bellabeat Marketing Analytics Team: This team of data analysts is responsible for collecting, analyzing, and reporting data to guide Bellabeat’s marketing strategy. They are key stakeholders in the analysis.
-3. Statement of the Business Task:
+
+4. Statement of the Business Task:
+ 
 The business task is to conduct a comprehensive analysis of smart device data associated with a specific Bellabeat product. This analysis aims to uncover insights into consumer behavior, preferences, and usage patterns. The ultimate goal is to provide actionable recommendations that will guide Bellabeat’s marketing strategy. The analysis should address questions related to user engagement, feature popularity, potential areas for improvement, and opportunities for growth. The results will be presented to key stakeholders, including the executive team, to inform high-level strategies and tactics for the future success of the product and the company.
-2
 
 Preparing the data:
+
 1. Where is the data located?
+   
 All data used for this particular case study was downloaded from Kaggle through this link https://www.ka ggle.com/datasets/arashnic/fitbit (CC0: Public Domain, dataset made available through Mobius): This Kaggle data set contains personal fitness tracker from thirty fitbit users. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
-2. How is the data organized?
+
+3. How is the data organized?
+   
 The data is organized by categories as follows: * Daily: Activity, Calories, Intensities, Steps, Sleep • Hourly: Calories, intensities, Steps
 • Minutes: Calories: Narrow, Wide
 • Intensities: Narrow, Wide
@@ -56,12 +66,13 @@ The data is organized by categories as follows: * Daily: Activity, Calories, Int
 • Sleep
 • Steps: Narrow, Wide • Heart Rate
 • Weight
-3.
+
 The data is reliable and has been made available by Möbius in his Kaggle account and publicly available
 through this website https://www.kaggle.com/datasets/arashnic/fitbit.
 This dataset was generated by respondents to a distributed survey via Amazon Mechanical Turk between 03.12.2016-05.12.2016. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. From the Metadata, we can be assured that we’re getting accurate, complete and unbiased data that’s been vetted and proven fit for use.
-4.
-Does our data ROCCC?
+
+4. Does our data ROCCC?
+   
 • Data Reliable: Medium. Data collected from third-party and a big portion of it imputed directly by
 the end users.
 • Data Original: Medium. BellaBeat, inc owns all rights, title, and interest in the Data collected from a third party.
@@ -69,10 +80,11 @@ the end users.
 • Data Current: Low. The data is said to be updated yearly however, the data made available is outdated and collected from 4/12/2016 to 5/12/2016.
 • Data Cited: High. Data source is well-documented and made available by Kaggle.
 Are there issues with bias or credibility in this data?
-3
 
-Processing the Data
-1. Tools chosen:
+5. Processing the Data
+
+Tools chosen:
+
 We specifically chose R programming for this particular project for the following reasons:
 • Data Manipulation and Transformation: R programming handles large datasets like the ones made available for analysis by BellaBeat. R also is a well known tool for statistical computing and data analysis. It excels at data manipulation and transformation, making it well-suited for complex data cleaning, reshaping, and analysis tasks which fits perfectly with the Bellabeat project scope.
 • Data Visualization: R has powerful data visualization libraries such as ggplot2, which allows for the creation of highly customized and publication-quality plots and charts.
@@ -80,11 +92,18 @@ We specifically chose R programming for this particular project for the followin
 In summary, we chose R programming for its versatility in statistical analysis, data manipulation, and visualization, especially for tasks related to combining data from users metrics, helping us find trends to better understand users behaviors and how they are currently using their smart devices. Then, using the results, we are planning on presenting recommendations to stakeholders to be implemented by the marketing department.
 Steps I have taken to ensure that the data is clean
 Ensuring that the data is clean involves several steps to address issues such as missing values, outliers, inconsistencies, and other errors.
-• Understand the Data: We started by familiarizing ourselves with the structure and content of the datasets. We used functions such as colnames, str, head, print, and summary to get deeper information about the data, like the size of the data frame, the column names, the data type, etc. Performing this task, we quickly noticed that all datasets have the ‘Id’ field in common. This can be used to merge the datasets.
+• Understand the Data: We started by familiarizing ourselves with the structure and content of the datasets. We used functions such as colnames, str, head, print, and summary to get deeper information about the data, like the size of the data frame, the column names, the data type, etc. 
+
+Performing this task, we quickly noticed that all datasets have the ‘Id’ field in common. This can be used to merge the datasets.
+
  install.packages('tidyverse')
 library(tidyverse)
 daily_activity <- read.csv("dailyActivity_merged.csv") daily_sleep <- read.csv("sleepDay_merged.csv") hourly_step <- read.csv("hourlySteps_merged.csv") hourly_calories <- read.csv("hourlyCalories_merged.csv") minute_sleep <- read.csv("minuteSleep_merged.csv") weight_data <- read.csv("weightLogInfo_merged.csv")
-Steps taken for checking the data 1. Identify all the columns and their names in the datasets
+
+Steps taken for checking the data 
+
+1. Identify all the columns and their names in the datasets
+
 2. Identify the structure of the datasets
  colnames(daily_activity) colnames(daily_sleep) colnames(hourly_step) colnames(minute_sleep) colnames(hourly_calories) colnames(weight_data)
  str(daily_activity) str(daily_sleep) str(hourly_calories)
