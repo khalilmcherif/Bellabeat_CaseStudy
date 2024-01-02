@@ -361,6 +361,10 @@ geom_bar(stat = "identity", fill = "skyblue", color = "black", position = "dodge
 x = "Time", y = "Total number of steps", fill = "Id") + theme_minimal() + theme(axis.text.x = element_text(angle = 90))
 ```
 
+![0001](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/edc7cd42-19e1-45c6-91e5-96a08bab25a4)
+
+
+
 <h2> Total number of steps during the day </h2> 
 
 **Behavior 1:**
