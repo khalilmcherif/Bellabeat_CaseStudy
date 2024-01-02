@@ -752,7 +752,7 @@ From the 8 users that registered their weights over the 1 month period, only 5 h
 
 • Smart Device Inseparable: They do not wear their devices continuously.
 
-<h2> Users Pattern & Trends:
+<h2> Users Pattern & Trends: </h2>
  
 • Calories: More Steps, distance, active minutes = More Calories burned.
 
