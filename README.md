@@ -346,7 +346,6 @@ head(weight_data$Date) head(weight_data$Time)
 
 We merged hourly_steps and hourly_calories to find out when during the day users are most active
 
-Let’s Plot the results of the number of steps during the day
 ```
 steps_calories <- merge(hourly_step, hourly_calories, by = c("Id", "Date", "Time"))
 steps_calories_grouped <- steps_calories %>%
@@ -354,7 +353,9 @@ group_by(Time) %>%
 summarise(StepTotal = sum(StepTotal), CalorieTotal = sum(Calories))
 steps_calories_grouped2 <- steps_calories %>% group_by(Id, Time) %>%
 summarise(StepTotal = mean(StepTotal))
-
+```
+Let’s Plot the results of the number of steps during the day
+```
 library(ggplot2)
 ggplot(steps_calories_grouped2, aes(x = Time, y = StepTotal)) +
 geom_bar(stat = "identity", fill = "skyblue", color = "black", position = "dodge") + labs(title = "Total number of steps during the day",
@@ -363,9 +364,6 @@ x = "Time", y = "Total number of steps", fill = "Id") + theme_minimal() + theme(
 
 ![0001](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/edc7cd42-19e1-45c6-91e5-96a08bab25a4)
 
-
-
-<h2> Total number of steps during the day </h2> 
 
 **Behavior 1:**
 
@@ -383,8 +381,12 @@ library(dplyr)
 grouped_min_sleep <- minute_sleep %>%
 mutate(Hour = format(as.POSIXct(Time, format = "%H:%M:%S"), format = "%H")) %>% group_by(Hour) %>%
 summarise(TotalValue = sum(value), Count = n())
+
 ggplot(grouped_min_sleep, aes(x = Hour, y = TotalValue)) + geom_bar(stat = "identity", fill = "darkgreen", color = "black", position = "dodge") + labs(title = "Total number of sleeping minutes during the day", x = "Hour of the day", y = "Total of sleeping minutes") + theme_minimal() + theme(axis.text.x = element_text(angle = 90))
 ```
+
+![0002](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/f3c8c8f0-047e-4728-815d-a72c08664022)
+
 
 **Behavior #2:**
 
@@ -399,108 +401,95 @@ Average calories burned during the day
 library(dplyr)
 grouped_Cal <- hourly_calories %>%
 group_by(Time) %>% summarise(Average_Cal = mean(Calories))
+
 ggplot(grouped_Cal, aes(x = Time, y = Average_Cal)) +
 geom_bar(stat = "identity", fill = "green", color = "black", position = "dodge") + labs(title = "Average number of calories burned during the day", x = "Hour of the day", y = "Average Calories burned") + theme_minimal() +theme(axis.text.x = element_text(angle = 90))
 ```
 
-<h2> Most active day of the week </h2>
+![Screen Shot 2024-01-02 at 10 05 12 AM](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/d1ca4550-1253-4f8a-9173-88caf9e70e3c)
 
-Hour of the day
+
+<h2> Most active day of the week </h2>
 
 We created a new column in the daily_activity dataset called “DayOfWeek”. We then did the following to analyze the average active minutes for users during the week. Note that active minutes are the sum of VeryActiveMinutes, FairlyActiveMinutes, and LightlyActiveMinutes.
 
-We now plot the total activity minutes during the days of the week
-
-              
-Average Calories burned
- daily_activity$DayOfWeek <- weekdays(as.Date(daily_activity$Date)) daily_activity$ActiveMinutes <- rowSums(daily_activity[, c("VeryActiveMinutes", "FairlyActiveMinutes", "
+```             
+daily_activity$DayOfWeek <- weekdays(as.Date(daily_activity$Date)) daily_activity$ActiveMinutes <- rowSums(daily_activity[, c("VeryActiveMinutes", "FairlyActiveMinutes", "
 
 grouped_ActiveMin <- daily_activity %>% group_by(Id, DayOfWeek) %>% summarise(Avg_ActiveMin = mean(ActiveMinutes))
 grouped_ActiveMin$DayOfWeek <- factor(grouped_ActiveMin$DayOfWeek, levels = c("Monday", "Tuesday", "Wedn
+```
+We now plot the total activity minutes during the days of the week
 
+```
 ggplot(grouped_ActiveMin, aes(x = DayOfWeek, y = Avg_ActiveMin)) +
 geom_bar(stat = "identity", fill = "purple", color = "black", position = "dodge") +
 labs(title = "Average active minutes during the week", x = "Days of the Week", y = "Average Active Minutes") + theme_minimal() +
 theme(axis.text.x = element_text(angle = 45))
+```
 
-Average active minutes during the week
+![003](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/ab926f81-01b3-4089-b8bb-3603a5905d6f)
 
-Behavior #3
+**Behavior #3**
 
-                                                                                                                                                                                                                                                   Days of the Week
 We can conclude from the bar graph that users are more active during Saturdays. So they are considered weekend warriors as it is expected of most people in general.
-Most steps taken during the day
-12
-  Average Active Minutes
-Monday
-Tuesday
-Wednesday
-Thursday
-Friday
-Saturday
-Sunday
 
+```
 grouped_steps <- hourly_step %>% group_by(Id, Time) %>% summarise(Avg_steps = mean(StepTotal))
-ggplot(grouped_steps, aes(x = Time, y = Avg_steps)) + geom_bar(stat = "identity", fill = "brown", color = "black", position = "dodge") +
-labs(title = "Average steps taken during the day", x = "Time of the day", y = "Average Steps taken") + theme_minimal() + theme(axis.text.x= element_text(angle = 45))
+ggplot(grouped_steps, aes(x = Time, y = Avg_steps)) + geom_bar(stat = "identity", fill = "brown", color = "black", position = "dodge") + labs(title = "Average steps taken during the day", x = "Time of the day", y = "Average Steps taken") + theme_minimal() + theme(axis.text.x= element_text(angle = 45))
+```
 
-Average steps taken during the day
-3000
-2000
-1000
-0
-Behavior #4
-                                                                                                                                                            Time of the day
+![004](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/270bcf40-34b0-43fe-a762-0f9c1d5a3b40)
+
+
+**Behavior #4**
+                                                                                                                                  
 From the bar graph, we see that on the average most steps taken by users are at the hours of 7:00AM, 1:00PM and, 6:00PM. Again this strengthen our assumption that users are working adults whom, a good proportion of them, prefer to walk to work and go out walking during lunch breaks. One should also not omit that users might exercise as well during those peak hours.
-Weight loss journey
+
+<h2> Weight loss journey </h2>
+
 To analyze this users behavior and understand if they are in a journey to losing weight, we decided to analyze the weight changes of users during the available data period which is from the 04.12.2016 to 05.12.2016.
 
-library(ggplot2) library(dplyr)
+```
+library(ggplot2) 
+library(dplyr)
 grouped_weight <- weight_data %>% group_by(Id, Date) %>% summarise(AvgWeightKg = mean(WeightKg))
 # Plotting
 ggplot(grouped_weight, aes(x = Date, y = AvgWeightKg, fill = as.factor(Id))) + geom_bar(stat = "identity", position = "dodge", color = "black") + labs(title = "Average weight for each user on different dates", x = "Date", y = "Average Weight (Kg)", fill = "User ID") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
-13
-Average Steps taken
+![Screen Shot 2024-01-02 at 10 19 37 AM](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/90aa9d0a-d8cb-43c2-99ad-680c5106e473)
 
-
- 
-Average weight for each user on different dates
-
-                     Date
 From the graph we see that the selected users have stable weight and there are no signs of weight loss behavior. However, the data is limited and historical data, especially for weight changes, is necessary in order to better understand users weight behavior. Thus more data is needed to be collected to draw a better conclusion. This analysis is thus inconclusive.
 
-Analyzing users Preferences
-Logs entry preference
+<h2> Analyzing users Preferences </h2>
+
+**Logs entry preference**
+
 Let’s study manual or automatic logs for engaged users.
-##
-## False  True
-##    26    41
+```
 labels <- paste0(names(manual_log_counts), "\n", sprintf("%.1f%%", percentages))
  library(scales)
-manual_log_counts <- table(weight_data$IsManualReport) percentages <- manual_log_counts / sum(manual_log_counts) * 100 print(manual_log_counts)
- 14
-Average Weight (Kg)
-Apr 11
-Apr 18
-Apr 25
-May 02
-May 09
-
+manual_log_counts <- table(weight_data$IsManualReport) percentages <- manual_log_counts / sum(manual_log_counts) * 100 
+```
+```
  # Set the overall size of the pie chart
 par(mar = c(1, 1, 1, 1))
 # Plot the pie chart with labels inside
-pie(manual_log_counts, labels = labels, col = c("blue", "red"), main = "ManualLog Distribu
-ManualLog Distribution
-False 38.8%
-tion", cex = 1
-  True 61.2%
-Preference #1:
-We can see from this pie chart that 61% of engaged users do enter the data about their weight manually while 39% don’t. It is interesting to note that users prefer to enter their data and are conscious about taking full advantage of their smart devices. However this portion of engaged users is very insignificant because from the 33 unique users we are studying only 8 entered the weight logs. From those 8 only 5 have entered the logs more than 2 times during the whole month. To get conclusive analysis users need to enter their data on regular basis thus more work is needed to raise users awarenesss regarding this particular feature,
-Users prefer to wear their devices continuously?
+pie(manual_log_counts, labels = labels, col = c("blue", "red"), main = "ManualLog Distribution", cex = 1)
+```
+
+![0006](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/a5086c67-4144-4a2b-99ff-053c93e1ebd6)
+
+**Preference #1:**
+
+We can see from this pie chart that 61% of engaged users do enter the data about their weight manually while 39% don’t. It is interesting to note that users prefer to enter their data and are conscious about taking full advantage of their smart devices. However this portion of engaged users is very insignificant because from the 33 unique users we are studying only 8 entered the weight logs. From those 8 only 5 have entered the logs more than 2 times during the whole month. To get conclusive analysis users need to enter their data on regular basis thus more work is needed to raise users awarenesss regarding this particular feature.
+
+**Users prefer to wear their devices continuously?**
+
 In order to understand this users preference, we decided to analyze the non activity periods registered by the smart devices or what it is here called “Sedentary Minutes”. While sedentary means not moving, if we omit the minutes users are asleep the rest of the minutes per day should be should be active minutes, very, fairly, or lightly active. So the total minutes per day or 1440 minutes minus the total sleeping minutes minus the total active minutes should give us the total of sedentary minutes. If we compare those values to the sedentary minutes the devices are recording we should have a better understanding if the users are actually not moving or not wearing their devices at all.
-15
-TRUE)
+
+```
  #compare non activity minutes to sedentary minutes
 library(dplyr)
 combined_activity_sleep <- merge(daily_sleep, daily_activity, by = c("Id", "Date"), all =
@@ -508,400 +497,275 @@ combined_activity_sleep <- combined_activity_sleep %>% mutate(Difference = 1440 
 
  # Remove rows where TotalMinutesAsleep is NA or ActiveMinutes is 0
 combined_activity_sleep <- combined_activity_sleep %>% filter(!is.na(TotalTimeInBed) & ActiveMinutes != 0)
+
 # Check if the calculated difference matches SedentaryMinutes
 combined_activity_sleep <- combined_activity_sleep %>%
-mutate(Diff_hour = round(as.numeric(SedentaryMinutes)/60 - as.numeric(Difference)/60 , 1
-combined_activity_sleep$Match <- combined_activity_sleep$Difference == combined_activity_s
+mutate(Diff_hour = round(as.numeric(SedentaryMinutes)/60 - as.numeric(Difference)/60 , 1))
+combined_activity_sleep$Match <- combined_activity_sleep$Difference == combined_activity_sleep$Sedentary
+
 # Display the relevant columns
 selected_columns <- c("Id", "Date", "ActiveMinutes", "TotalTimeInBed", "SedentaryMinutes", result <- combined_activity_sleep[, selected_columns]
+```
+
 Let’s Plot the result and see the proportion of users who wear their devices compare to the ones who don’t wear it continuously.
-16
-)) leep$Sedentary
- "Difference",
-ribution", cex
-een", "orange"
- library(scales)
+
+```
+library(scales)
 SedUsers_counts <- table(result$Match)
+
 # Calculate percentages manually
 percentages <- prop.table(SedUsers_counts) * 100 # Create labels with percentages
 labels <- paste0(names(SedUsers_counts), "\n", sprintf("%.1f%%", percentages))
 par(mar = c(1, 1, 1, 1))
+
 # Plot the pie chart
 pie(SedUsers_counts, labels = labels, col = c("green", "orange"), main = "Users usage Dist
+
 # Add legend
 legend("topright", legend = c("Not always wearing", "Always wearing device"), fill = c("gr
+```
 
-Users usage Distribution
- Type of user
-Not always wearing Always wearing device
- FALSE 69.5%
- Preference #2:
-TRUE 30.5%
+![0007](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/2cf74433-cdbc-41db-ae29-c8efc64e9a39)
+
+<h2> Preference #2: </h2>
+
 Users don’t prefer to wear their devices at all the time, actually 70% of them don’t actually wear their devices continuously.
-Trends & Patterns:
+
+<h1> Trends & Patterns: </h1>
+
 During this section we will explore common trends and patterns in our current users.
-Calorie crusher?
+
+<h2> Calorie crusher? </h2>
+
 What’s the relationship between steps taken in a day and calories? Do more steps means more calories burned? For this analysis we will use the daily activity data set as it contains data about the number of steps taken daily by users and the number of calories burned as well.
- library(tidyverse) library(ggplot2)
-ggplot(data = daily_activity,
-aes(x = TotalSteps, y = Calories)) +
-geom_point() + geom_smooth(method = "lm", se = FALSE) +
-labs(title = "Number of Steps Vs. Calories Burned") +
-annotate("text", x=23000, y=2000, label="Positive Correlation exists", color="blue", fon
-17
-tface="bold",
 
-Number of Steps Vs. Calories Burned
-5000
-4000
-3000
-2000
-1000
-0
- 0 10000 20000
-TotalSteps
-30000
-Calories
-Positive Correlation exists
-                     Trend #1:
+```
+library(tidyverse)
+library(ggplot2)
+ggplot(data = daily_activity,aes(x = TotalSteps, y = Calories)) +geom_point() + geom_smooth(method = "lm", se = FALSE) + labs(title = "Number of Steps Vs. Calories Burned") + annotate("text", x=23000, y=2000, label="Positive Correlation exists", color="blue", fontface="bold")
+```
+
+![00010](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/12da1b8e-2671-48c6-a36f-4a0b3fec03ff)
+
+**Trend #1:**
+
 From the scattered plot we can quickly see a positive correlation between the number of steps taken and the number of calories burned. We can conclude that the more steps users take, the more calories they burn. The opposite is correct as well.
-More active minutes means more calories?
-Let’s find out if there is a correlation between active minutes and number of calories burned.
-18
- lightly activ
-ce="bold", siz
- #ActiveMinutes was previously created and it is the sum of very active, fairly active, and
-ggplot(data = daily_activity[daily_activity$ActiveMinutes >= 100 & daily_activity$Calories >= 100,] ,
-aes(x = ActiveMinutes, y = Calories)) +
-geom_point() + geom_smooth(method = "lm", se = FALSE) +
-labs(title = "Active Minutes Vs. Calories Burned") +
-annotate("text", x=400, y=1400, label="Positive Correlation exists", color="red", fontfa
 
-5000
-4000
-3000
-2000
-1000
-Active Minutes Vs. Calories Burned
- 100 200
-300 400 500
-ActiveMinutes
-Calories
-Positive Correlation exists
-                     Trend #2:
+<h2> More active minutes means more calories? </h2>
+
+Let’s find out if there is a correlation between active minutes and number of calories burned.
+
+```
+ggplot(data = daily_activity[daily_activity$ActiveMinutes >= 100 & daily_activity$Calories >= 100,], aes(x = ActiveMinutes, y = Calories)) + geom_point() + geom_smooth(method = "lm", se = FALSE) + labs(title = "Active Minutes Vs. Calories Burned") + annotate("text", x=400, y=1400, label="Positive Correlation exists", color="red", fontface="bold")
+```
+
+![0008](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/725d9dc1-7a69-4a4f-9817-efd89f79af8b)
+
+**Trend #2:**
+
 In fact there is a positive correlation, but not a strong one, between the number of active minutes and the number of calories burned. So the more users spend minutes actively the more calories they burn.
-High heart rate intervals mean more calories?
-*There is no correlation between the heart rate and number of calories burned.
-Sleeping Pattern
-More time in bed means more sleeping hours?
+
+<h2> High heart rate intervals mean more calories? </h2>
+
+There is no correlation between the heart rate and number of calories burned.
+
+<h2> Sleeping Pattern </h2>
+
+**More time in bed means more sleeping hours?**
+
 Let’s see if there is a correlation between time in bed and sleeping time.
-19
-m_smooth(metho e="bold", size
- library(ggplot2)
+
+```
+library(ggplot2)
 ggplot(data=daily_sleep, aes(x=TotalTimeInBed, y=TotalMinutesAsleep)) + geom_point() + geo
 labs(title = "Time in Bed Vs. Time Asleep") +
-annotate("text", x=400, y=600, label="Positive Correlation exists", color="red", fontfac
+annotate("text", x=400, y=600, label="Positive Correlation exists", color="red", fontface = "bold")
+```
 
- Time in Bed Vs. Time Asleep
-         800
-600
-400
-200
-        250 500 750 100
-TotalTimeInBed
-Positive Correlation exists
-TotalMinutesAsleep
-Trend #2:
+![00011](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/7abd7ae8-2003-4650-b049-056cdfeedb75)
+
+**Trend #2:**
+
 We can rapidly conclude from this strong correlation between Time in Bed and Time Asleep, that the more time users stay in bed the more they sleep. There are few exceptions with some users who stay more time in bed with less time asleep. They could be reading, using their phones or doing other things in bed rather than sleeping.
-More active minutes means more sleeping?
+
+<h2> More active minutes means more sleeping? </h2>
+
 Let’s find out if users who spend more time actively sleep more. For this analysis we will merge both daily activity and daily sleep databases.
-20
-0
-ooth(method = e="bold", size
- library(tidyverse)
+
+```
+library(tidyverse)
 library(dplyr)
 combined_data <- merge(daily_sleep, daily_activity, by= c("Id", "Date")) combined_data <- combined_data %>%
 mutate(TotalActivity = VeryActiveMinutes + LightlyActiveMinutes + FairlyActiveMinutes)
 result <- combined_data %>%
 group_by(Id, Date) %>%
 filter(TotalActivity >= 200 & TotalMinutesAsleep >= 300) %>% summarize(Id, TotalActivity = mean(TotalActivity, na.rm = TRUE),
-TotalMinutesAsleep = mean(TotalMinutesAsleep, na.rm = TRUE), Date )
-ggplot(data=result, aes(x=TotalActivity, y=TotalMinutesAsleep)) + geom_point() + geom_sm labs(title = "Total Activity Vs. Time Asleep") +
-annotate("text", x=450, y=650, label="Positive Correlation exists", color="red", fontfac
+TotalMinutesAsleep = mean(TotalMinutesAsleep, na.rm = TRUE), Date)
+```
+Let's Plot the results:
 
-700
-600
-500
-400
-300
-Total Activity Vs. Time Asleep
- 200 300 400 500
-TotalActivity
-Positive Correlation exists
-TotalMinutesAsleep
-                   Trend #3:
+```
+ggplot(data=result, aes(x=TotalActivity, y=TotalMinutesAsleep)) + geom_point() + geom_sm labs(title = "Total Activity Vs. Time Asleep") + annotate("text", x=450, y=650, label="Positive Correlation exists", color="red", fontface = "bold")
+```
+
+![Screen Shot 2024-01-02 at 10 50 49 AM](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/ec2186cc-e75c-445b-98fb-95f0a073f6e2)
+
+**Trend #3:**
+
 This analysis is not conclusive even though there is a correlation present. So the number of active minutes a day is not necessarily connected with the number of sleeping minutes.
-More distance traveled means more sleeping?
+
+<h2>More distance traveled means more sleeping? </h2>
+
 Let’s find out if users who walk longer distances a day sleep for longer time.
-21
-mooth(method = ", size=3.5, a
- result2 <- combined_data %>% group_by(Id, Date) %>% summarize(
-TotalDistance = sum(TotalDistance, na.rm = TRUE),
-TotalMinutesAsleep = sum(TotalMinutesAsleep, na.rm = TRUE) )
-ggplot(data=result2, aes(x=TotalDistance, y=TotalMinutesAsleep)) + geom_point() + geom_s labs(title = "Total Distance Vs. Time Asleep") +
-annotate("text", x=15, y=650, label="No Correlation exists", color="red", fontface="bold
 
-1000
-750
-500
-250
-Total Distance Vs. Time Asleep
- 0 5 10 15 20
-TotalDistance
-No Correlation exists
-TotalMinutesAsleep
-                    Trend #4:
+```
+result2 <- combined_data %>% group_by(Id, Date) %>%
+summarize(TotalDistance = sum(TotalDistance, na.rm = TRUE), TotalMinutesAsleep = sum(TotalMinutesAsleep, na.rm = TRUE))
+
+ggplot(data=result2, aes(x=TotalDistance, y=TotalMinutesAsleep)) + geom_point() + geom_s labs(title = "Total Distance Vs. Time Asleep") + annotate("text", x=15, y=650, label="No Correlation exists", color="red", fontface="bold")
+```
+
+![000018](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/d8465ea9-269d-4ccc-890a-b37c6fb8a578)
+
+**Trend #4:**
+
 Similarly we cannot conclude that the longer users travel a day the more minutes they sleep.
-More calories burned mean more sleeping?
-22
-h(method = "lm ze=3.5, angle=
- result3 <- combined_data %>% group_by(Id, Date) %>% summarize(
-AvgCalories = mean(Calories, na.rm = TRUE), AvgMinutesAsleep = mean(TotalMinutesAsleep, na.rm = TRUE))
-ggplot(data=result3, aes(x=AvgCalories, y=AvgMinutesAsleep)) + geom_point() + geom_smoot labs(title = "Calories Burned Vs. Time Asleep") +
-annotate("text", x=3150, y=200, label="No Correlation", color="red", fontface="bold", si
 
-800
-600
-400
-200
-Calories Burned Vs. Time Asleep
- 1000 2000 3000 4000 5000
-AvgCalories
-No Correlation
-AvgMinutesAsleep
-                    Trend #5:
-Similarly we cannot conclude that the more users burn calories a day the more minutes they sleep. ##Healthy lifestyle?
-Consistent users mean consistent results?
+<h2>More calories burned mean more sleeping? </h2>
+
+```
+result3 <- combined_data %>% group_by(Id, Date) %>%
+summarize(AvgCalories = mean(Calories, na.rm = TRUE), AvgMinutesAsleep = mean(TotalMinutesAsleep, na.rm = TRUE))
+
+ggplot(data=result3, aes(x=AvgCalories, y=AvgMinutesAsleep)) + geom_point() + geom_smoot labs(title = "Calories Burned Vs. Time Asleep") + annotate("text", x=3150, y=200, label="No Correlation", color="red", fontface="bold")
+```
+
+![Screen Shot 2024-01-02 at 10 54 46 AM](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/e0e1347a-859a-432b-ba60-875f71c033ad)
+
+**Trend #5:**
+
+Similarly we cannot conclude that the more users burn calories a day the more minutes they sleep. 
+
+<h1>Healthy lifestyle?</h1>
+
+<h2>Consistent users mean consistent results?</h2>
+
 What is the average distance traveled by users for each day of the week? It is consistent or changes from day to day?
-23
-sday", "Wednes
- library(tidyverse)
+
+```
+library(tidyverse)
 library(dplyr)
 grouped_distance <- daily_activity %>%
-group_by(Id, DayOfWeek) %>% summarise(avg_distance = mean(TotalDistance))
-grouped_distance$DayOfWeek <- factor(grouped_distance$DayOfWeek, levels = c("Monday", "Tue
-ggplot(grouped_distance, aes(x = DayOfWeek, y = avg_distance)) +
-geom_bar(stat = "identity", fill = "yellow", color = "orange", position = "dodge") +
-labs(title = "Average daily distance per Day", x = "Days of the Week",
-y = "Average traveled distance" ,
-fill = "Id") +
-geom_smooth(method = "lm", se = TRUE) + theme_minimal() +
-theme(axis.text.x = element_text(angle = 45))
+group_by(Id, DayOfWeek) %>% 
+summarise(avg_distance = mean(TotalDistance))
+grouped_distance$DayOfWeek <- factor(grouped_distance$DayOfWeek, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
-Average daily distance per Day
-15
-10
-5
-0
-Trend #6:
-                                                                                                                                                                                                                                                    Days of the Week
+ggplot(grouped_distance, aes(x = DayOfWeek, y = avg_distance)) + geom_bar(stat = "identity", fill = "yellow", color = "orange", position = "dodge") + labs(title = "Average daily distance per Day", x = "Days of the Week",
+y = "Average traveled distance" ,fill = "Id") + geom_smooth(method = "lm", se = TRUE) + theme_minimal() + theme(axis.text.x = element_text(angle = 45))
+```
+
+![00013](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/6e4d78b5-7241-42cd-b4be-c9cbe0312460)
+
+**Trend #6:**
+
 We can conclude the existence of a regular walking trend for our users with a consistent average daily distance traveled. We note also two exceptions for both Wednesdays and Saturdays where we see a slight increase in the average distance traveled.
-Consistent users mean consistent results?
+
+<h2>Consistent users mean consistent results? </h2>
+
 What is the sleeping pattern for users for each day of the week?
- combined_data$DayOfWeek <- weekdays(as.Date(combined_data$Date))
-combined_data$DayOfWeek <- factor(combined_data$DayOfWeek, levels = c("Monday", "Tuesday",
+
+```
+combined_data$DayOfWeek <- weekdays(as.Date(combined_data$Date))
+grouped_distance$DayOfWeek <- factor(grouped_distance$DayOfWeek, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 grouped_sleep <- combined_data %>% group_by(DayOfWeek) %>%
 summarise(avg_sleep = mean(TotalMinutesAsleep))
-ggplot(grouped_sleep, aes(x = DayOfWeek, y = avg_sleep)) +
-geom_bar(stat = "identity", fill = "orange", color = "blue", position = "dodge") +
-labs(title = "Average Minutes of Sleep per day", x = "Days of the Week",
-y = "Average Minutes of Sleep" ,
-fill = "Id") +
-geom_smooth(method = "lm", se = TRUE) + theme_minimal() +
-theme(axis.text.x = element_text(angle = 45))
-24
-"Wednesday",
-Average traveled distance
-Monday
-Tuesday
-Wednesday
-Thursday
-Friday
-Saturday
-Sunday
 
-Average Minutes of Sleep per day
-400
-300
-200
-100
-0
-Trend #7:
-                        Days of the Week
+ggplot(grouped_sleep, aes(x = DayOfWeek, y = avg_sleep)) + geom_bar(stat = "identity", fill = "orange", color = "blue", position = "dodge") + labs(title = "Average Minutes of Sleep per day", x = "Days of the Week", y = "Average Minutes of Sleep", fill = "Id") + geom_smooth(method = "lm", se = TRUE) + theme_minimal() + theme(axis.text.x = element_text(angle = 45))
+```
+
+![00015](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/219905c6-2bd4-4e47-8df8-db958ea3e2dd)
+
+**Trend #7:**
+
 Users maintain a consistent sleeping habit for the days of the week as they sleep on average 7 hours per day.
- combined_data$DayOfWeek <- weekdays(as.Date(combined_data$Date))
-combined_data$DayOfWeek <- factor(combined_data$DayOfWeek, levels = c("Monday", "Tuesday",
+
+```
+combined_data$DayOfWeek <- weekdays(as.Date(combined_data$Date))
+grouped_distance$DayOfWeek <- factor(grouped_distance$DayOfWeek, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 grouped_sleepBed <- combined_data %>%
 group_by(DayOfWeek) %>%
 summarise(avg_sleep = mean(TotalMinutesAsleep), avg_timeInBed = mean(TotalTimeInBed))
-ggplot(grouped_sleepBed, aes(x = DayOfWeek)) +
-geom_bar(aes(y = avg_timeInBed), stat = "identity", fill = "blue", alpha = 0.7, position geom_bar(aes(y = avg_sleep), stat = "identity", fill = "red", alpha = 0.7, position = "d labs(title = "Average Sleep and Time in Bed by Day of the Week",
-y = "Minutes",
-x = "Day of the Week") + scale_fill_manual(values = c("blue", "red")) + theme_minimal()
-25
- "Wednesday",
-= "dodge") + odge") +
-Average Minutes of Sleep
-Monday
-Tuesday
-Wednesday
-Thursday
-Friday
-Saturday
-Sunday
+ggplot(grouped_sleepBed, aes(x = DayOfWeek)) + geom_bar(aes(y = avg_timeInBed), stat = "identity", fill = "blue", alpha = 0.7, position geom_bar(aes(y = avg_sleep), stat = "identity", fill = "red", alpha = 0.7, position = "d labs(title = "Average Sleep and Time in Bed by Day of the Week", y = "Minutes", x = "Day of the Week") + scale_fill_manual(values = c("blue", "red")) + theme_minimal()
+```
 
-Average Sleep and Time in Bed by Day of the Week
-       500
-400
-300
-200
-100
-0
-Trend #8:
-Monday
-Tuesday
-Wednesday
-Thursday
-Friday
-Saturday
-Sunday
-                         Day of the Week
+![000019](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/6159f9d7-71fa-43d2-82d1-c251c9523947)
+
+**Trend #8:**
+
 We see a clear consistency in the minutes users stay in bed vs the sleeping minutes. Almost every day users stay in bed the same time before falling asleep. Similarly we see a consistency in the average sleeping time for our users with an average of 420 minutes or 7 hours per day.
-Weight loss pattern?
-More calories burned mean more weight loss?
- weight_data2 <- weight_data %>%
+
+<h1>Weight loss pattern? </h1>
+
+<h2>More calories burned mean more weight loss?</h2>
+
+```
+weight_data2 <- weight_data %>%
 group_by(Id) %>%
 summarise(across(everything(), list(~ mean(., na.rm = TRUE)), .names = "Avg_{.col}"))
+
 library(ggplot2)
-ggplot(data = weight_data, aes(x = Date, y = WeightKg, color = as.factor(Id))) +
-geom_point() +
-geom_smooth(aes(group = Id), method = "lm", se = FALSE) + labs(title = "Weight changes over 1 month period",
-x = "Date",
-y = "Weight (Kg)", color = "Id") +
-theme_minimal() +
-theme(axis.text.x = element_text(angle = 45))
-26
-Minutes
+ggplot(data = weight_data, aes(x = Date, y = WeightKg, color = as.factor(Id))) + geom_point() + geom_smooth(aes(group = Id), method = "lm", se = FALSE) + labs(title = "Weight changes over 1 month period", x = "Date", y = "Weight (Kg)", color = "Id") + theme_minimal() + theme(axis.text.x = element_text(angle = 45))
+```
 
-Weight changes over 1 month period
-           120
-100
-80
-60
-Trend #9:
-Id
-1503960366
-     1927972279
-     2873212765
-     4319703577
-     4558609924
-     5577150313
-     6962181067
-     8877689391
-             Date
+![0005](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/39a6beab-01fd-4196-876d-bca52bb77a9b)
+
 From the scattered plot, we see that from the 8 users who recorded their weight over the 1 month period, very small variation is recorded in their weights. Again more data is necessary to draw a constructive conclusion and fi out if users are gaining or losing weight over time.
-More active minutes mean less BMI?
- library(ggplot2)
+
+<h2> More active minutes mean less BMI?</h2>
+
+```
+library(ggplot2)
 filtered_data <- weight_data[weight_data$BMI < 28, ]
-ggplot(data = filtered_data, aes(x = Date, y = BMI, color = as.factor(Id))) + geom_point() +
-geom_smooth(aes(group = Id), method = "lm", se = FALSE) +
-labs(title = "BMI variation over Time",
-x = "Date",
-y = "Body Mass Index", color = "Id") +
-theme_minimal() +
+ggplot(data = filtered_data, aes(x = Date, y = BMI, color = as.factor(Id))) + geom_point() + geom_smooth(aes(group = Id), method = "lm", se = FALSE) + labs(title = "BMI variation over Time", x = "Date", y = "Body Mass Index", color = "Id") + theme_minimal() +
 theme(axis.text.x = element_text(angle = 45))
-27
-Weight (Kg)
-Apr 11
-Apr 18
-Apr 25
-May 02
-May 09
+```
 
-BMI variation over Time
-26
-24
-22
-Let’s Plot the results
-Id
-1503960366
-     2873212765
-     4319703577
-     4558609924
-     6962181067
-     8877689391
-                    Date
-## `summarise()` has grouped output by 'Id'. You can override using the `.groups` ## argument.
-28
-ulate the aver
-Body Mass Index
-Apr 11
-Apr 18
-Apr 25
-May 02
-May 09
- grouped_weight <- weight_data %>%
-group_by(Id, Date) %>%
-summarise(AvgWeightKg = mean(WeightKg)) # We used the mean aggregation function to calc
- ggplot(grouped_weight, aes(x = Date, y = AvgWeightKg, fill = as.factor(Id))) + geom_bar(stat = "identity", position = "dodge", color = "black") + labs(title = "Average weight for each user on different dates",
-x = "Date",
-y = "Average Weight (Kg)", fill = "User ID") +
-theme_minimal() +
-theme(axis.text.x = element_text(angle = 45, hjust = 1))
+![00016](https://github.com/khalilmcherif/Bellabeat_CaseStudy/assets/152605408/2c2cb49f-de4a-4703-b277-0b607f863c77)
 
-Average weight for each user on different dates
-         100
-50
-0
-Trend #10:
-User ID 1503960366
-     1927972279
-     2873212765
-     4319703577
-     4558609924
-     5577150313
-     6962181067
-     8877689391
-                     Date
+**Trend #10:**
+
 From the 8 users that registered their weights over the 1 month period, only 5 have consistent registered inputs. All others have only 1 registered weight log.
-Summary of Findings:
-Users Behavior
+
+<h1> Summary of Findings: </h1>
+
+<h2> Users Behavior </h2>
+
 • Early birds: Rise at 7:00am and go to bed at 10:00pm
+
 • Weekend Warriors: Most active on Saturdays.
+
 • Work Commuters: Most distance traveled at commuting hours (8:00am, 1:00pm, and 6:00pm)
-Users Preferences:
+
+<h2> Users Preferences: </h2>
+
 • Data Conscious: Users prefer not to enter their data manually.
+
 • Smart Device Inseparable: They do not wear their devices continuously.
-Users Pattern & Trends:
+
+<h2> Users Pattern & Trends:
+ 
 • Calories: More Steps, distance, active minutes = More Calories burned.
+
 • Healthy Lifestyle: Consistency in sleeping and activity habits = Maintaining shape (Weight and BMI)
-29
-Average Weight (Kg)
-Apr 11
-Apr 18
-Apr 25
-May 02
-May 09
 
-Recommendations:
+<h1> Recommendations: </h1>
+
 • Survey & data collection: More data is necessary to draw better conclusions. Historical data will give us a better understanding of user trends over time.
-• Data entry Log reward program: Push users to log their data about their weight. This will make them use the devices more and achieve their goals more efficiently.
-• Notification features: Add new notification features that will alert users when their average daily sleeping minutes, steps, distances, calories are not met. Move! Time to go to bed! For example. This will enhance users experience with the app and help them in return achieve their goals more rapidly.
-THANK YOU!
-We hope you’ll use these insights and recommendations to guide the marketing department and help unlock new growth opportunities for the company.
-Here is the link to read the case study from my personal portfolio:
-PORTFOLIO
-Link to download the case study presentation:
-PRESENTATION
-30
 
+• Data entry Log reward program: Push users to log their data about their weight. This will make them use the devices more and achieve their goals more efficiently.
+
+• Notification features: Add new notification features that will alert users when their average daily sleeping minutes, steps, distances, calories are not met. Move! Time to go to bed! For example. This will enhance users experience with the app and help them in return achieve their goals more rapidly.
+
+<h1> THANK YOU! </h1>
+
+We hope you’ll use these insights and recommendations to guide the marketing department and help unlock new growth opportunities for the company.
